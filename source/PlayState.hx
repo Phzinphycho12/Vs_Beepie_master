@@ -2818,9 +2818,9 @@ class PlayState extends MusicBeatState
 					{
 						case 'stalker':
 							FlxG.sound.music.stop();
-							var video:MP4Handler = new MP4Handler();
+							/*var video:MP4Handler = new MP4Handler();
 							video.playMP4(Paths.video('Cutscene1'));
-							video.finishCallback = function()
+							video.finishCallback = function()*/
 							{
 								FlxTransitionableState.skipNextTransIn = true;
 								FlxTransitionableState.skipNextTransOut = true;
@@ -3232,12 +3232,7 @@ class PlayState extends MusicBeatState
 					releaseArray = [false, false, false, false];
 				} 
 
-				var anas:Array<Ana> = [null,null,null,null];
-
-				for (i in 0...pressArray.length)
-					if (pressArray[i])
-						anas[i] = new Ana(Conductor.songPosition, null, false, "miss", i);
-
+				
 				// HOLDS, check for sustain notes
 				if (holdArray.contains(true) && /*!boyfriend.stunned && */ generatedMusic)
 				{
@@ -3247,9 +3242,7 @@ class PlayState extends MusicBeatState
 							goodNoteHit(daNote);
 					});
 				}
-		 
-				if (KeyBinds.gamepad && !FlxG.keys.justPressed.ANY)
-				{
+		
 					// PRESSES, check for note hits
 					if (pressArray.contains(true) && generatedMusic)
 					{
@@ -3320,9 +3313,7 @@ class PlayState extends MusicBeatState
 										mashViolations--;
 									scoreTxt.color = FlxColor.WHITE;
 									var noteDiff:Float = -(coolNote.strumTime - Conductor.songPosition);
-									anas[coolNote.noteData].hit = true;
-									anas[coolNote.noteData].hitJudge = Ratings.CalculateRating(noteDiff, Math.floor((PlayStateChangeables.safeFrames / 60) * 1000));
-									anas[coolNote.noteData].nearestNote = [coolNote.strumTime,coolNote.noteData,coolNote.sustainLength];
+						
 									goodNoteHit(coolNote);
 								}
 							}
@@ -3335,11 +3326,6 @@ class PlayState extends MusicBeatState
 							}
 					}
 
-					if (!loadRep)
-						for (i in anas)
-							if (i != null)
-								replayAna.anaArray.push(i); // put em all there
-				}
 				notes.forEachAlive(function(daNote:Note)
 				{
 					if(PlayStateChangeables.useDownscroll && daNote.y > strumLine.y ||
@@ -3445,7 +3431,7 @@ class PlayState extends MusicBeatState
 
 			public function backgroundVideo(source:String) // for background videos
 				{
-					#if cpp
+					/*#if cpp
 					useVideo = true;
 			
 					FlxG.stage.window.onFocusOut.add(focusOut);
@@ -3496,7 +3482,7 @@ class PlayState extends MusicBeatState
 						webmHandler.pause();
 					else
 						webmHandler.resume();
-					#end
+					#end*/
 				}
 
 	function noteMiss(direction:Int = 1, daNote:Note):Void
